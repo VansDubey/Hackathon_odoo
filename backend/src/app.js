@@ -4,6 +4,7 @@ import helmet from "helmet";
 import { env } from "./config/env.js";
 import { pool } from "./config/database.js";
 import { errorHandler, notFoundHandler } from "./middleware/error-handler.js";
+import authRoutes from "./modules/auth/auth.routes.js";
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.use("/api/auth", authRoutes);
 
 app.get("/api/health", async (req, res, next) => {
   try {

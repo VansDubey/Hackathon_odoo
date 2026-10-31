@@ -41,5 +41,11 @@ export const env = Object.freeze({
   port: parsePort(process.env.PORT),
   clientUrl: validateClientUrl(process.env.CLIENT_URL),
   databaseUrl,
-  databaseSsl: parseBoolean(process.env.DATABASE_SSL)
+  databaseSsl: parseBoolean(process.env.DATABASE_SSL),
+  jwtSecret: process.env.JWT_SECRET?.trim() || "",
+  jwtExpiresIn: process.env.JWT_EXPIRES_IN || "1h"
 });
+
+if (env.jwtSecret.length < 32) {
+  throw new Error("JWT_SECRET must be at least 32 characters long");
+}
