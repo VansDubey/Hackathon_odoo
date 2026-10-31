@@ -9,10 +9,6 @@ export const pool = new Pool({
 });
 
 export async function connectDatabase() {
-  if (!env.databaseUrl) {
-    throw new Error("DATABASE_URL is not configured");
-  }
-
   await pool.query("SELECT 1");
   console.log("Connected to PostgreSQL");
 }
